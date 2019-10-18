@@ -29,7 +29,7 @@ pipeline {
     }
     stage('Creating Container') {
       steps{
-        sh 'docker run -d -p 80:80 dockerImage:v1'
+        sh 'docker run -itd -p 80:80 :$BUILD_NUMBER'
       }
     }
     
