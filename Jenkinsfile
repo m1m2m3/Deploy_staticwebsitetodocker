@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "an5028044/dockerpipeline"
+    registry = "an5028044/deploying"
     registryCredential = 'dockerhub1'
     dockerImage = ''
   }
@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('SCM checkout') {
       steps {
-        git 'https://github.com/m1m2m3/CI-CD-with-Docker.git'
+        git 'https://github.com/m1m2m3/Deploy_staticwebsitetodocker.git'
       }
     }
     stage('Building image') {
