@@ -29,7 +29,7 @@ pipeline {
     }
     stage('Creating Container') {
       steps{
-        sh 'docker run -itd -p 9000:80 registry + ":$BUILD_NUMBER"'
+        sh 'docker run -d -p 9000:80 registry + ":$BUILD_NUMBER"'
       }
     }
     
