@@ -15,6 +15,7 @@ pipeline {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          sh 'docker run -it -d -p 9001:80 registry + ":$BUILD_NUMBER"'
         }
       }
     }
@@ -25,11 +26,6 @@ pipeline {
             dockerImage.push()
           }
         }
-      }
-    }
-    stage('Creating Container') {
-      steps{
-        sh 'docker run -it -d -p 9001:80 registry + ":$BUILD_NUMBER"'
       }
     }
     
