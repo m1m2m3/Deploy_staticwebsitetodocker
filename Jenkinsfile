@@ -32,7 +32,7 @@ pipeline {
     stage ('Deploy to Dev') {
         def dockerRun = 'docker run -d -p 9005:80 --name my-tomcat-app registry + ":$BUILD_NUMBER"'
         sshagent(['54.175.12.190']) {
-        sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.46.1 ${dockerRun}"
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.175.12.190 ${dockerRun}"
                                   }
                             }
   }
