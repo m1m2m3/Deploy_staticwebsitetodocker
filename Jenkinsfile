@@ -29,11 +29,12 @@ pipeline {
       }
     }
     
-    stage ('Deploy to Dev') {
+    stage('Deploy to Dev') {
+      steps{
         def dockerRun = 'docker run -d -p 9005:80 --name my-tomcat-app registry + ":$BUILD_NUMBER"'
         sshagent(['54.175.12.190']) {
         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.175.12.190 ${dockerRun}"
                                   }
-                            }
+           }                }
   }
 }
