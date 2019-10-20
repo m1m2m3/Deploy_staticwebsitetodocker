@@ -17,6 +17,7 @@ pipeline {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          sh 'docker run -it -d -p 8090:80 registry + ":$BUILD_NUMBER"'
                 }
            }
       }
