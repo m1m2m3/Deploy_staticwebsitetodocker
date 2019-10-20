@@ -3,6 +3,7 @@ pipeline {
     registry = "an5028044/deploying"
     registryCredential = 'dockerhub1'
     dockerImage = ''
+    dockerRun = ''
   }
   agent any
   stages {
@@ -31,7 +32,7 @@ pipeline {
     
     stage('Deploy to Dev') {
       steps{
-        def dockerRun = 'docker run -d -p 9005:80 --name my-tomcat-app registry + ":$BUILD_NUMBER"'
+        dockerRun = 'docker run -d -p 9005:80 --name my-tomcat-app registry + ":$BUILD_NUMBER"'
         sshagent(['54.175.12.190']) {
         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.175.12.190 ${dockerRun}"
                                   }
