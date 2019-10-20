@@ -11,15 +11,15 @@ pipeline {
         git 'https://github.com/m1m2m3/Deploy_staticwebsitetodocker.git'
       }
     }
-    stage('Building image') {
+    stage('Building image') 
+      {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
-          sh 'docker run -it -d -p 9001:80 registry + ":$BUILD_NUMBER"'
-        }
+                }
+           }
       }
-    }
-    stage('Deploying Image') {
+    stage('Deploying Image to DockerHub') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -29,5 +29,11 @@ pipeline {
       }
     }
     
+    stage ('Deploy to Dev') {
+        def dockerRun = 'docker run -d -p 9005:80 --name my-tomcat-app registry + ":$BUILD_NUMBER"'
+        sshagent(['54.175.12.190']) {
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.46.1 ${dockerRun}"
+                                  }
+                            }
   }
 }
