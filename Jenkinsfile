@@ -3,7 +3,7 @@ pipeline {
     registry = "an5028044/deploying"
     registryCredential = 'dockerhub1'
     dockerImage = ''
-    dockerRun = ''
+    
   }
   agent any
   stages {
